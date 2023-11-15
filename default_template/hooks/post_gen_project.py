@@ -32,22 +32,15 @@ def remove_dotgithub_folder():
 
 def generate_gitignore():
     print(INFO + "Fetching recent .gitignore rules...")
-    urls = [
-        "https://www.toptal.com/developers/gitignore/api/dotenv",
-        "https://www.toptal.com/developers/gitignore/api/windows",
-        "https://www.toptal.com/developers/gitignore/api/macos",
-        "https://www.toptal.com/developers/gitignore/api/linux",
-    ]
 
-    responses = []
+    rules = ["dotenv", "windows", "macos", "linux"]
+    url = "https://www.toptal.com/developers/gitignore/api/" + ",".join(rules)
 
     try:
-        for url in urls:
-            response = requests.get(url)
-            response.raise_for_status()
-            responses.append(response.text)
+        response = requests.get(url)
+        response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        print(WARNING + f"Error fetching URL: {e}, using cached .gitignore")
+        print(WARNING + f"Error: {e}, using cached .gitignore")
         return None
 
     custom_header = """######################################################
@@ -66,7 +59,7 @@ def generate_gitignore():
 
 """
 
-    combined_gitignore = custom_header + "\n".join(responses)
+    combined_gitignore = custom_header + "\n" + response.text
 
     with open(".gitignore", "w") as gitignore_file:
         gitignore_file.write(combined_gitignore)
