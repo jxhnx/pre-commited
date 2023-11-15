@@ -1,6 +1,0 @@
-name: pre-committed
-channels:
-    - conda-forge
-dependencies:
-    - python=3.10
-    - pre-commit=3.5.0
