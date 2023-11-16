@@ -43,7 +43,7 @@ def generate_gitignore():
         print(WARNING + f"Error: {e}, using cached .gitignore")
         return None
 
-    custom_header = """######################################################
+    custom_header = f"""######################################################
 # Custom / project-specific .gitignore
 ######################################################
 
@@ -54,9 +54,8 @@ def generate_gitignore():
 
 
 ######################################################
-# Generated .gitignore for .env, Windows, macOS, Linux
+# Generated .gitignore for {", ".join(rules)}
 ######################################################
-
 """
 
     combined_gitignore = custom_header + "\n" + response.text
