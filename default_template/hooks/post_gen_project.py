@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 
 import requests
 
@@ -8,6 +9,10 @@ WARNING = "\x1b[1;33m [WARNING]: "
 INFO = "\x1b[1;33m [INFO]: "
 HINT = "\x1b[3;33m"
 SUCCESS = "\x1b[1;32m [SUCCESS]: "
+
+
+def yes(value):
+    return str(value).lower() not in ["n", "0", "false", "f", "no", "off"]
 
 
 def remove_open_source_files():
@@ -67,7 +72,8 @@ def generate_gitignore():
 def main():
     if "{{ cookiecutter.open_source_license }}" == "Not open source":
         remove_open_source_files()
-    if "{{ cookiecutter.open_source_license}}" != "GPLv3":
+
+    if "{{ cookiecutter.open_source_license }}" != "GPLv3":
         remove_gplv3_files()
 
     if "{{ cookiecutter.ci_tool }}" != "Gitlab":
@@ -78,7 +84,12 @@ def main():
 
     generate_gitignore()
 
-    print(SUCCESS + "Nice and done!" + TERMINATOR)
+    if yes("{{ cookiecutter.git_init }}"):
+        subprocess.call(["git", "init", "-b", "main"])
+        subprocess.call(["git", "add", "*"])
+        subprocess.call(["git", "commit", "-m", "Initial commit"])
+
+    print(SUCCESS + "The cookie is cut!" + TERMINATOR)
 
 
 if __name__ == "__main__":
