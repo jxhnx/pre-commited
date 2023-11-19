@@ -84,7 +84,7 @@ def main():
 
     generate_gitignore()
 
-    if yes("{{ cookiecutter.git_init }}"):
+    if yes("{{ cookiecutter.git_init | default('false') }}"):
         subprocess.call(["git", "init", "-b", "main"])
         subprocess.call(["git", "add", "*"])
         subprocess.call(["git", "commit", "-m", "Initial commit"])
