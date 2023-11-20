@@ -36,7 +36,7 @@ def remove_dotgithub_folder():
 
 
 def generate_gitignore():
-    print(INFO + "Fetching recent .gitignore rules...")
+    print(INFO + "Fetching recent .gitignore rules..." + TERMINATOR)
 
     rules = ["dotenv", "windows", "macos", "linux"]
     url = "https://www.toptal.com/developers/gitignore/api/" + ",".join(rules)
@@ -45,7 +45,7 @@ def generate_gitignore():
         response = requests.get(url)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        print(WARNING + f"Error: {e}, using cached .gitignore")
+        print(WARNING + f"Error: {e}, using cached .gitignore" + TERMINATOR)
         return None
 
     custom_header = f"""######################################################
@@ -85,6 +85,8 @@ def main():
     generate_gitignore()
 
     if yes("{{ cookiecutter.git_init | default('false') }}"):
+        print(INFO + "Initializing git repository..." + TERMINATOR)
+
         subprocess.call(["git", "init", "-b", "main"])
         subprocess.call(["git", "add", "*"])
         subprocess.call(["git", "commit", "-m", "Initial commit"])
