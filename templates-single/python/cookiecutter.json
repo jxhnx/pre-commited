@@ -1,0 +1,17 @@
+{
+  "project_name": "My Python Project",
+  "repo_name": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('_', '-')|replace('.', '-')|trim() }}",
+  "description": "Awesome project description.",
+  "author_name": "John Hoffmann",
+  "open_source_license": ["MIT", "BSD", "GPLv3", "Apache Software License 2.0", "Not open source"],
+  "ci_tool": ["None", "Gitlab", "Github"],
+  "code_formatter_print_width": "100",
+  "python_env": ["None", "venv", "conda", "mamba"],
+  "create_python_env": false,
+  "git_init": false,
+  "__prompts__": {
+    "code_formatter_print_width": "code_formatter_print_width (recommended: 80/100/120)",
+    "python_env": "python_env (add requirements.txt/environment.yaml)",
+    "create_python_env": "create_python_env (if any selected)"
+  }
+}

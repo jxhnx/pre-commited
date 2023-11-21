@@ -1,0 +1,12 @@
+name: "{{cookiecutter.repo_name}}"
+channels:
+  # {%- if cookiecutter.python_env == "conda" %}
+  - defaults
+  # {%- endif %}
+  - conda-forge
+dependencies:
+  - python==3.11
+  - pip
+  - pre-commit==3.5.0
+  - pip:
+    # - add pip dependencies here ...
