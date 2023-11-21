@@ -3,7 +3,13 @@
   "repo_name": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('_', '-')|replace('.', '-')|trim() }}",
   "description": "Awesome project description.",
   "author_name": "John Hoffmann",
-  "open_source_license": ["MIT", "BSD", "GPLv3", "Apache Software License 2.0", "Not open source"],
+  "open_source_license": [
+    "MIT",
+    "BSD",
+    "GPLv3",
+    "Apache Software License 2.0",
+    "Not open source"
+  ],
   "ci_tool": ["None", "Gitlab", "Github"],
   "code_formatter_print_width": "100",
   "python_env": ["None", "venv", "conda", "mamba"],
