@@ -1,0 +1,6 @@
+{
+  "template": [
+    "default (./default_template)",
+    "python (./templates-single/python)"
+  ]
+}
