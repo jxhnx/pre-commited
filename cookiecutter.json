@@ -1,6 +1,7 @@
 {
   "template": [
     "default (./default_template)",
-    "python (./templates-single/python)"
+    "python (./templates-single/python)",
+    "python_datascience (./templates-single/python_datascience)"
   ]
 }
