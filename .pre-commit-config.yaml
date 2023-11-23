@@ -1,3 +1,5 @@
+exclude: "{{cookiecutter.repo_name}}(?:/.+\\.yaml$)"
+
 default_language_version:
   python: python3.10
 repos:
