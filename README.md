@@ -1,24 +1,38 @@
 # pre-committed
 
-Collection of some dev environment setups with pre-commit configs.
+Collection of dev environment setups with basic pre-commit/linting configs. Contains advanced options such as environment creation in Python. Win/Mac/Linux.
+
+Install [cookiecutter](https://github.com/cookiecutter/cookiecutter) in your Python environment or with your package manager of choice, e.g., with `pip install cookiecutter` or `brew install cookiecutter`.
 
 # Usage
 
-# Template structure
+Run, choose your template, and follow the instructions with:
 
-Templates are divided into two categories: single and stack. Single templates are for a single language, e.g. Python. Stack templates are for a combination of languages and frameworks, e.g. Python and Django. Furthermore, more specialized usage specific templates are denoted with `_usecase1`, `_usecase2`, etc.
+```
+cookiecutter https://github.com/jxhnx/pre-committed
+```
 
-- 📁 templates-single
-  - 📁 python
-  - 📁 python_usecase1
-  - 📁 python_usecase2
-  - 📁 ...
-- 📁 templates-stack
-  - 📁 python-djnago
-  - 📁 python-django_usecase1
-  - 📁 ...
-
+The templates are usually build so that options like `git init` or environment creation with, e.g., `venv` or `conda` are only available if they are found on your system.
 
 # Prerequisites
 
-You require an installation of [pre-commit](https://pre-commit.com/). Check your installation with `pre-commit -V`. You can install pre-commit in you Python environment of choice, e.g. with `pip install pre-commit` or globally with your favorite package manager, e.g. with `brew install pre-commit`.
+This repo and its templates make use of [pre-commit](https://pre-commit.com/). Check your installation with `pre-commit -V`. You can install pre-commit in you Python environment of choice, e.g. with `pip install pre-commit` or globally with your favorite package manager, e.g. with `brew install pre-commit`.
+
+# Development
+
+To create a new template, you can use the `default_template` directory as starting point. Copy it to `templates-single/` or `templates-stack/`, and adjust the files to your needs. Finally, register your template in the root [cookiecutter.json](./cookiecutter.json) file. You can find more information about cookiecutter in its [docs](https://cookiecutter.readthedocs.io/). Some template file types or files may have to be added (ignored) in the .prettierignore or excluded in the .pre-commit-config.yaml.
+
+Templates are divided into two categories: single and stack. Single templates are for a single language, e.g. Python. Stack templates are for a combination of languages and frameworks, e.g. Python and Django. Furthermore, more specialized, use-case specific templates are denoted with `_usecase1`, `_usecase2`, etc.
+
+```
+├── templates-single/
+│   ├── python/
+│   ├── python_usecase1/
+│   ├── python_usecase2/
+│   ├── javascript/
+│   └── ...
+└── templates-stack/
+    ├── python-django/
+    ├── python-django_usecase1/
+    └── ...
+```

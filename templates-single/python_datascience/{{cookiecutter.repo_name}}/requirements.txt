@@ -1,0 +1,8 @@
+ipywidgets
+jupyterlab
+matplotlib
+numpy
+pandas
+pre-commit==3.5.0
+seaborn
+tqdm
