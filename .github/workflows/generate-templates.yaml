@@ -1,0 +1,19 @@
+name: Generate templates and lint results
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  templating:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: "latest"
+      - run: pip install cookiecutter pre-commit pytest pytest-order
+      - run: pytest -m "default"

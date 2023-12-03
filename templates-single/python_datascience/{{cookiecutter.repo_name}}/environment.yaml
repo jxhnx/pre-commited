@@ -1,8 +1,8 @@
 name: "{{cookiecutter.repo_name}}"
 channels:
-{% if cookiecutter.python_env == "conda" -%}
+{%- if cookiecutter.python_env == "conda" +%}
   - defaults
-{% endif -%}
+{%- endif +%}
   - conda-forge
 dependencies:
   - python==3.11

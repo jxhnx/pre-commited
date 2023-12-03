@@ -1,6 +1,11 @@
 # pre-committed
 
-Collection of dev environment setups with basic pre-commit/linting configs. Contains advanced options such as environment creation in Python. Win/Mac/Linux.
+Collection of dev environment setups with basic pre-commit/linting configs. Contains advanced options such as:
+
+- OS recognition and compatibility (Mac, Linux, Windows)
+- Language specific .gitignore creation with API call to [gitignore.io](https://www.toptal.com/developers/gitignore)
+- Python environment creation for venv, conda, mamba
+- Git init
 
 Install [cookiecutter](https://github.com/cookiecutter/cookiecutter) in your Python environment or with your package manager of choice, e.g., with `pip install cookiecutter` or `brew install cookiecutter`.
 
@@ -36,3 +41,13 @@ Templates are divided into two categories: single and stack. Single templates ar
     ├── python-django_usecase1/
     └── ...
 ```
+
+## Testing
+
+Tests are written with `pytest`. Since some tests will create Python environments, it is a good idea to run them in a Docker container. To run the tests, `cd` into `tests` and run, e.g.,:
+
+```
+docker compose up test-default
+```
+
+The default test-set includes template creation with default values and a pre-commit linting check on the created repos. They use `@pytest.mark.default` and are also run in GitHub's CI.
