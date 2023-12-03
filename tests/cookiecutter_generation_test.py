@@ -43,13 +43,6 @@ def test_linting_generated_templates():
                 proc.stdin.write(b"rm -rf .git/\n")
                 proc.stdin.write(b"git init -b main\n")
                 proc.stdin.write(b"pre-commit install --config .pre-commit-config.yaml\n")
-
-                if (template_dir / ".gitignore").exists():
-                    # API-generated .gitignore fails trailing-whitespace hook and is re-formatted
-                    # This should not fail the test
-                    proc.stdin.write(b"git add .gitignore\n")
-                    proc.stdin.write(b"pre-commit run --files .gitignore\n")
-
                 proc.stdin.write(b"git add .\n")
                 proc.stdin.write(b"pre-commit run --all-files\n")
                 proc.stdin.close()
