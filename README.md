@@ -44,10 +44,10 @@ Templates are divided into two categories: single and stack. Single templates ar
 
 ## Testing
 
-Test are written in with `pytest`. Since some tests will create Python environments, it es a good idea to run them in Docker container. To run the tests, `cd` into `tests` and run, e.g.,:
+Tests are written with `pytest`. Since some tests will create Python environments, it is a good idea to run them in a Docker container. To run the tests, `cd` into `tests` and run, e.g.,:
 
 ```
 docker compose up test-default
 ```
 
-The default test-set includes template creation with default values and a pre-commit linting check on the created repos.
+The default test-set includes template creation with default values and a pre-commit linting check on the created repos. They use `@pytest.mark.default` and are also run in GitHub's CI.

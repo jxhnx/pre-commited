@@ -6,4 +6,4 @@ ADD . /app
 
 RUN pip install cookiecutter pre-commit pytest pytest-order
 
-CMD [ "pytest", "-m", "not python_env" ]
+CMD [ "pytest", "-m", "default" ]

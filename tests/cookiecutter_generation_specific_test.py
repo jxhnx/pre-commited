@@ -4,11 +4,13 @@ import pytest
 from .cookiecutter_generation_test import generate_template as generate_specific_template
 
 
+@pytest.mark.default
 def test_default_template():
     git_init = {"git_init": "true"}
     generate_specific_template("default_template", git_init)
 
 
+@pytest.mark.default
 def test_python_env_files():
     PATH = "templates-single/python"
     use_venv = {"python_env": "venv", "create_python_env": "false"}

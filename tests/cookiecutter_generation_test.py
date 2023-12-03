@@ -15,6 +15,7 @@ def template_dirs():
     return get_templates()
 
 
+@pytest.mark.default
 def test_cookiecutter_json_exists(template_dirs):
     for template_dir in template_dirs:
         assert (
@@ -22,12 +23,14 @@ def test_cookiecutter_json_exists(template_dirs):
         ).exists(), f"cookiecutter.json does not exist in {template_dir}"
 
 
+@pytest.mark.default
 def test_generate_templates(template_dirs):
     for template_dir in template_dirs:
         generate_template(template_dir)
 
 
 @pytest.mark.order(-1)
+@pytest.mark.default
 def test_linting_generated_templates():
     generated_template_dirs = [
         template_dir for template_dir in Path("test_output").glob("*/*") if template_dir.is_dir()

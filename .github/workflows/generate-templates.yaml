@@ -16,4 +16,4 @@ jobs:
         with:
           miniconda-version: "latest"
       - run: pip install cookiecutter pre-commit pytest pytest-order
-      - run: pytest -m "not python_env"
+      - run: pytest -m "default"
