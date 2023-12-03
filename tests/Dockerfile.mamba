@@ -1,0 +1,11 @@
+FROM continuumio/miniconda3
+
+RUN conda install mamba -c conda-forge -y
+
+WORKDIR /app
+
+ADD . /app
+
+RUN pip install cookiecutter pre-commit pytest pytest-order
+
+CMD [ "pytest", "-m", "python_env"]

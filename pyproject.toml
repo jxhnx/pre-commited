@@ -29,3 +29,8 @@ extend-select = [
   # "FURB",        # refurb
   # "PYI",         # flake8-pyi
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "python_env: [slow] Pythen venv/conda/mamba environment generation",
+]
