@@ -85,16 +85,12 @@ def create_virtual_environment(package_manager: str):
         subprocess.run(["python", "-m", "venv", "env"])
 
         if os.name == "posix":  # Unix-like systems
+            subprocess.run(["env/bin/pip", "install", "--upgrade", "pip"], check=True)
             subprocess.run(
-                ["sh", "-c", "source env/bin/activate && pip install --upgrade pip"], check=True
-            )
-            subprocess.run(
-                ["sh", "-c", "source env/bin/activate && pip install -r requirements.txt"],
+                ["env/bin/pip", "install", "-r", "requirements.txt"],
                 check=True,
             )
-            subprocess.run(
-                ["sh", "-c", "source env/bin/activate && pre-commit install"], check=True
-            )
+            subprocess.run(["env/bin/pre-commit", "install"], check=True)
         elif os.name == "nt":  # Windows
             subprocess.run(
                 [".\\env\\Scripts\\python.exe", "-m", "pip", "install", "--upgrade", "pip"],
