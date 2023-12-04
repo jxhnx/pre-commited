@@ -31,6 +31,10 @@ def remove_dotgitlabciyml_file():
     os.remove(".gitlab-ci.yml")
 
 
+def remove_bitbucketpipelinesyml_file():
+    os.remove("bitbucket-pipelines.yml")
+
+
 def remove_dotgithub_folder():
     shutil.rmtree(".github")
 
@@ -81,6 +85,9 @@ def main():
 
     if "{{ cookiecutter.ci_tool }}" != "Github":
         remove_dotgithub_folder()
+
+    if "{{ cookiecutter.ci_tool }}" != "Bitbucket":
+        remove_bitbucketpipelinesyml_file()
 
     generate_gitignore()
 

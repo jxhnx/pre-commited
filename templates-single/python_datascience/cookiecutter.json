@@ -10,7 +10,7 @@
     "Apache Software License 2.0",
     "Not open source"
   ],
-  "ci_tool": ["None", "Gitlab", "Github"],
+  "ci_tool": ["None", "Gitlab", "Github", "Bitbucket"],
   "code_formatter_print_width": "100",
   "python_env": ["None", "venv", "conda", "mamba"],
   "create_python_env": false,
