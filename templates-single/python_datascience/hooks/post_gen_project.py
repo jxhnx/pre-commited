@@ -29,8 +29,8 @@ def remove_gplv3_files():
         os.remove(file_name)
 
 
-def remove_dotgitlabciyaml_file():
-    os.remove(".gitlab-ci.yaml")
+def remove_dotgitlabciyml_file():
+    os.remove(".gitlab-ci.yml")
 
 
 def remove_dotgithub_folder():
@@ -153,7 +153,7 @@ def main():
         remove_gplv3_files()
 
     if "{{ cookiecutter.ci_tool }}" != "Gitlab":
-        remove_dotgitlabciyaml_file()
+        remove_dotgitlabciyml_file()
 
     if "{{ cookiecutter.ci_tool }}" != "Github":
         remove_dotgithub_folder()
