@@ -15,5 +15,6 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: "latest"
+      - uses: hashicorp/setup-terraform@v3
       - run: pip install cookiecutter pre-commit pytest pytest-order
       - run: pytest -m "default"
