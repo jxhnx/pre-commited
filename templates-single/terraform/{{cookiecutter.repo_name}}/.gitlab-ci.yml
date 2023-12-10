@@ -1,0 +1,19 @@
+stages:
+  - lint
+
+precommit:
+  stage: lint
+  image: python:3.11
+  variables:
+    PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+  cache:
+    paths:
+      - ${PRE_COMMIT_HOME}
+  before_script:
+    - apt-get update && apt-get install -y gnupg software-properties-common wget unzip
+    - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/hashicorp.list
+    - apt-get update && apt-get install terraform
+    - pip install -q pre-commit
+  script:
+    - pre-commit run --show-diff-on-failure --color=always --all-files
