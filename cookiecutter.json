@@ -2,6 +2,7 @@
   "template": [
     "default (./default_template)",
     "python (./templates-single/python)",
-    "python_datascience (./templates-single/python_datascience)"
+    "python_datascience (./templates-single/python_datascience)",
+    "terraform (./templates-single/terraform)"
   ]
 }
