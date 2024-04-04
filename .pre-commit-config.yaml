@@ -1,4 +1,4 @@
-exclude: "{{cookiecutter.repo_name}}(?:/.+\\.yaml$)"
+exclude: "{{cookiecutter.repo_name}}(/.*)?"
 
 default_language_version:
   python: python3.10
