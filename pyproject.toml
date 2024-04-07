@@ -32,6 +32,6 @@ extend-select = [
 
 [tool.pytest.ini_options]
 markers = [
-    "default: [fast] Default tests; run in CI",
-    "python_env: [slow] Pythen venv/conda/mamba environment generation",
+    "default: [fast] Default tests, templating only.",
+    "system: [slow] Has additional system pre-requesites and usually performs installs."
 ]
