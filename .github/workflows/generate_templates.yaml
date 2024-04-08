@@ -1,0 +1,75 @@
+name: Generate templates and lint results
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      default_template: ${{ steps.filter.outputs.default_template }}
+      python: ${{ steps.filter.outputs.python }}
+      python_datascience: ${{ steps.filter.outputs.python_datascience }}
+      terraform: ${{ steps.filter.outputs.terraform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          base: "main"
+          filters: |
+            default_template:
+              - 'default_template/**'
+            python:
+              - 'templates-single/python/**'
+            python_datascience:
+              - 'templates-single/python_datascience/**'
+            terraform:
+              - 'templates-single/terraform/**'
+
+  default_template:
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.default_template == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/composite_setup_tests
+      - run: python -m pytest default_template tests
+
+  python:
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.python == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/composite_setup_tests
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: "latest"
+      - run: conda install mamba -c conda-forge -y
+      - run: python -m pytest templates-single/python tests
+
+  python_datascience:
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.python_datascience == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/composite_setup_tests
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: "latest"
+      - run: conda install mamba -c conda-forge -y
+      - run: python -m pytest templates-single/python_datascience tests
+
+  terraform:
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/composite_setup_tests
+      - uses: hashicorp/setup-terraform@v3
+      - run: python -m pytest templates-single/terraform tests
