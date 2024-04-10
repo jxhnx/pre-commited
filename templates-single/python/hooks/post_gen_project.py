@@ -140,6 +140,21 @@ def create_virtual_environment(package_manager: str):
             print(SUCCESS + "Virtual environment created!" + TERMINATOR)
 
 
+def run_pre_commit_subprocess():
+    print(INFO + "Run pre-commit..." + TERMINATOR)
+    subprocess.call(["git", "init", "-b", "main"])
+    subprocess.call(["git", "add", "*"])
+    subprocess.call(["pre-commit", "run", "--all-files"])
+    subprocess.call(["rm", "-rf", ".git"])
+
+
+def run_initial_git_commit_subprocess():
+    print(INFO + "Initializing git repository..." + TERMINATOR)
+    subprocess.call(["git", "init", "-b", "main"])
+    subprocess.call(["git", "add", "*"])
+    subprocess.call(["git", "commit", "-m", "Initial commit"])
+
+
 def main():
     PYTHON_ENV = "{{ cookiecutter.python_env | default('None') }}"
 
@@ -179,12 +194,14 @@ def main():
 
     generate_gitignore()
 
-    if yes("{{ cookiecutter.git_init | default('false') }}"):
-        print(INFO + "Initializing git repository..." + TERMINATOR)
+    if (
+        "{{ cookiecutter.code_formatter_print_width }}"
+        != "{{ cookiecutter.__default_code_formatter_print_width }}"
+    ):
+        run_pre_commit_subprocess()
 
-        subprocess.call(["git", "init", "-b", "main"])
-        subprocess.call(["git", "add", "*"])
-        subprocess.call(["git", "commit", "-m", "Initial commit"])
+    if yes("{{ cookiecutter.git_init | default('false') }}"):
+        run_initial_git_commit_subprocess()
 
     msg_vars = dict(
         activate_os_venv="source env/bin/activate"
