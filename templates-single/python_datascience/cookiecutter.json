@@ -11,7 +11,8 @@
     "Not open source"
   ],
   "ci_tool": ["None", "Gitlab", "Github", "Bitbucket"],
-  "code_formatter_print_width": "100",
+  "__default_code_formatter_print_width": "100",
+  "code_formatter_print_width": "{{ cookiecutter.__default_code_formatter_print_width }}",
   "python_env": ["None", "venv", "conda", "mamba"],
   "create_python_env": false,
   "git_init": false,
