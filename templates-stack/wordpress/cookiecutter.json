@@ -1,0 +1,21 @@
+{
+  "project_name": "My Awesome Project",
+  "repo_name": "{{ cookiecutter.project_name.lower()|replace(' ', '-')|replace('_', '-')|replace('.', '-')|trim() }}",
+  "description": "Awesome project description.",
+  "author_name": "John Hoffmann",
+  "open_source_license": [
+    "MIT",
+    "BSD",
+    "GPLv3",
+    "Apache Software License 2.0",
+    "Not open source"
+  ],
+  "ci_tool": ["None", "Gitlab", "Github"],
+  "__default_code_formatter_print_width": "140",
+  "code_formatter_print_width": "{{ cookiecutter.__default_code_formatter_print_width }}",
+  "wordpress_coding_standards": ["strict", "relaxed"],
+  "git_init": false,
+  "__prompts__": {
+    "code_formatter_print_width": "code_formatter_print_width (recommended: 0/120/140)"
+  }
+}

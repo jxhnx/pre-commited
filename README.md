@@ -50,3 +50,9 @@ Templates are divided into two categories: single and stack. Single templates ar
 Tests are written with `pytest`. To run tests locally, use `python -m pytest default_template tests` and replace `default_template` with the template you want to test. Tests just using cookiecutter are marked with `@pytest.mark.default`, tests using additional system requirements and installs are marked with `@pytest.mark.system`.
 
 The Github CI uses pytest in the same way and runs tests for all templates changes are detected in. This is the recommended approach since it installs template dependencies in a system independent container environment. Use [act](https://github.com/nektos/act) to run Github workflows locally, e.g., with `act -W .github/workflows/generate-templates.yaml --container-architecture linux/amd64` (you may have to remove/adjust the --container-architecture).
+
+## Tags
+
+- Major: Breaking changes
+- Minor: New template or feature in multiple templates
+- Service: Feature or fix in single template
