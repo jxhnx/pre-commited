@@ -8,7 +8,7 @@ Collection of dev environment setups with basic pre-commit/linting configs. Cont
 
 ## Baked ...
 
-`Python · PythonDatascience · Terraform`
+`Python · PythonDatascience · Terraform · Wordpress`
 
 # Usage
 
