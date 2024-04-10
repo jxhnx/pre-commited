@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+    wp_database:
+        image: mariadb:10.5
+        restart: unless-stopped
+        ports:
+            - ${WP_HOST_DB_PORT}:3306
+        env_file: .env
+        environment:
+            MYSQL_ROOT_PASSWORD: '${STAGING_DB_ROOT_PASSWORD}'
+            MYSQL_DATABASE: '${STAGING_DB_NAME}'
+            MYSQL_USER: '${STAGING_DB_USER}'
+            MYSQL_PASSWORD: '${STAGING_DB_PASSWORD}'
+        volumes:
+            - wp-data:/var/lib/mysql
+            - ${PROD_DB_DUMP_PATH}:/docker-entrypoint-initdb.d/${PROD_DB_NAME}.sql
+            - ${PROD_DB_INIT_PATH}:/docker-entrypoint-initdb.d/db_init.sql
+        networks:
+            - wordpress-network
+
+    phpmyadmin:
+        depends_on:
+            - wp_database
+        image: phpmyadmin/phpmyadmin:5.2
+        restart: unless-stopped
+        ports:
+            - 8081:80
+        env_file: .env
+        links:
+            - wp_database
+        environment:
+            PMA_HOSTS: wp_database
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        networks:
+            - wordpress-network
+
+    wordpress:
+        depends_on:
+            - wp_database
+        image: wordpress:php7.4-apache
+        restart: unless-stopped
+        ports:
+            - ${WP_PORT}:80
+        env_file: .env
+        environment:
+            WORDPRESS_DB_HOST: ${WP_HOST_DB_NAME}:${WP_HOST_DB_PORT}
+            WORDPRESS_DB_NAME: '${STAGING_DB_NAME}'
+            WORDPRESS_DB_USER: '${STAGING_DB_USER}'
+            WORDPRESS_DB_PASSWORD: '${STAGING_DB_PASSWORD}'
+        volumes:
+            - ./wordpress/:/var/www/html/
+        networks:
+            - wordpress-network
+
+volumes:
+    wp-data:
+
+networks:
+    wordpress-network:
+        driver: bridge

@@ -1,0 +1,18 @@
+stages:
+  - lint
+
+precommit:
+  stage: lint
+  image: nikolaik/python-nodejs:python3.12-nodejs21-slim
+  variables:
+      PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+  cache:
+      paths:
+          - ${PRE_COMMIT_HOME}
+  before_script:
+      - apt-get update && apt-get install -y php-cli php-xml composer
+      - npm install @wordpress/eslint-plugin --save-dev
+      - composer update
+      - pip install -q pre-commit
+  script:
+      - pre-commit run --all-files

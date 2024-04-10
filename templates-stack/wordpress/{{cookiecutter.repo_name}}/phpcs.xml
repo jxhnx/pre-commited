@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ruleset name="CustomWordPress">
+    <description>Custom WordPress Coding Standard with additional rules</description>
+
+    <rule ref="WordPress"/>
+
+    <!-- Additional rules -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="{{ cookiecutter.code_formatter_print_width }}"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+
+    {%- if cookiecutter.wordpress_coding_standards != "strict" %}
+    <!-- Ignore specific rules -->
+    <rule ref="Generic.Commenting.DocComment.ShortNotCapital">
+        <exclude name="Generic.Commenting.DocComment.ShortNotCapital"/>
+    </rule>
+    <rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+    </rule>
+    {%- endif %}
+
+    <!-- Ignore specific rules for specific files -->
+    <rule ref="WordPress.Files.FileName.InvalidClassFileName">
+        <exclude-pattern>wordpress/example.php</exclude-pattern>
+    </rule>
+</ruleset>
