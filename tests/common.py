@@ -21,7 +21,7 @@ def assert_linting_generated_template(generated_template_dir: Path):
             proc.stdin.write(b"git init -b main\n")
             proc.stdin.write(b"pre-commit install --config .pre-commit-config.yaml\n")
             proc.stdin.write(b"git add .\n")
-            proc.stdin.write(b"pre-commit run --all-files\n")
+            proc.stdin.write(b"pre-commit run --all-files --show-diff-on-failure\n")
             proc.stdin.close()
             proc.wait()
             assert proc.returncode == 0, f"Linting failed for {generated_template_dir}"
